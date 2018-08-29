@@ -29,13 +29,14 @@ dependencies {
     compile("no.fint:fint-felles-resource-model-java:${apiVersion}")
 
     testCompile("cglib:cglib-nodep:${cglibVersion}")
-    testCompile('org.spockframework:spock-spring:1.1-groovy-2.4')
-    testCompile('org.spockframework:spock-core:1.1-groovy-2.4')
+    testCompile("org.spockframework:spock-spring:${spockSpringVersion}")
+    testCompile("org.spockframework:spock-core:${spockSpringVersion}")
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleVersion
+    distributionType = Wrapper.DistributionType.ALL
 }
 
 if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {

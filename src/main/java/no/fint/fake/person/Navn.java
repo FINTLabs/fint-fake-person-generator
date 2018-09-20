@@ -1,6 +1,7 @@
 package no.fint.fake.person;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.WordUtils;
 import org.springframework.stereotype.Repository;
 
@@ -11,17 +12,18 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Repository
 public class Navn {
 
     @Getter
-    List<String> guttenavn;
+    private List<String> guttenavn;
 
     @Getter
-    List<String> jentenavn;
+    private List<String> jentenavn;
 
     @Getter
-    List<String> etternavn;
+    private List<String> etternavn;
 
     @PostConstruct
     public void init() throws IOException {
@@ -35,5 +37,6 @@ public class Navn {
             jentenavn = r.lines().map(l -> l.split(";")[0]).collect(Collectors.toList());
         }
 
+        log.info("Lastet {} etternavn, {} guttenavn og {} jentenavn.", etternavn.size(), guttenavn.size(), jentenavn.size());
     }
 }

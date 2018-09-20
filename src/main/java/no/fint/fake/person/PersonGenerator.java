@@ -42,7 +42,7 @@ public class PersonGenerator {
         return result;
     }
 
-    public <T> T sample(List<T> collection, ThreadLocalRandom random) {
+    private <T> T sample(List<T> collection, ThreadLocalRandom random) {
         return collection.get(random.nextInt(collection.size()));
     }
 
@@ -68,7 +68,7 @@ public class PersonGenerator {
         LocalDate birthdate = LocalDate.of(2002, 01, 01).plusDays(r.nextInt(366));
         result.setFodselsdato(Date.from(birthdate.atStartOfDay(ZoneId.of("UTC")).toInstant()));
         result.setFodselsnummer(identifikator(String.format("%Td%<Tm%<Ty%d%d", birthdate,  getSequence(female, r), r.nextInt(100))));
-        result.setPostadresse(sample(adresser.adresser, r));
+        result.setPostadresse(sample(adresser.getAdresser(), r));
         Kontaktinformasjon kontaktinformasjon = new Kontaktinformasjon();
         kontaktinformasjon.setMobiltelefonnummer(String.format("%s%07d", r.nextBoolean() ? "4" : "9", r.nextInt(0, 10000000)));
         kontaktinformasjon.setEpostadresse(String.format("%s%d@gmail.com", StringUtils.stripAccents(StringUtils.substringBefore(result.getNavn().getFornavn().toLowerCase(), " ")), r.nextInt(100)));

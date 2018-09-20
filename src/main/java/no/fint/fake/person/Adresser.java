@@ -1,6 +1,7 @@
 package no.fint.fake.person;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import no.fint.model.felles.kodeverk.iso.Landkode;
 import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.kompleksedatatyper.AdresseResource;
@@ -15,11 +16,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Repository
 public class Adresser {
 
     @Getter
-    List<AdresseResource> adresser;
+    private List<AdresseResource> adresser;
 
     @PostConstruct
     public void init() throws IOException {
@@ -39,5 +41,6 @@ public class Adresser {
                 return a;
             }).collect(Collectors.toList());
         }
+        log.info("Lastet {} adresser.", adresser.size());
     }
 }

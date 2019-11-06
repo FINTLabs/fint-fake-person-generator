@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,13 +28,13 @@ public class Navn {
 
     @PostConstruct
     public void init() throws IOException {
-        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/etternavn.txt")))) {
+        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/etternavn.txt"), StandardCharsets.UTF_8))) {
             etternavn = r.lines().map(l -> WordUtils.capitalizeFully(l.split("[ ;]")[1], ' ')).collect(Collectors.toList());
         }
-        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/guttenavn.txt")))) {
+        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/guttenavn.txt"), StandardCharsets.UTF_8))) {
             guttenavn = r.lines().map(l -> l.split(";")[0]).collect(Collectors.toList());
         }
-        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/jentenavn.txt")))) {
+        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/jentenavn.txt"), StandardCharsets.UTF_8))) {
             jentenavn = r.lines().map(l -> l.split(";")[0]).collect(Collectors.toList());
         }
 

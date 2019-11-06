@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class Adresser {
     @PostConstruct
     public void init() throws IOException {
         Link no = Link.with(Landkode.class, "systemid", "NO");
-        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/adresser.txt")))) {
+        try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/adresser.txt"), StandardCharsets.UTF_8))) {
             adresser = r.lines().skip(1).map(l -> l.split(";")).map(s -> {
                 AdresseResource a = new AdresseResource();
                 a.setPoststed(s[28]);

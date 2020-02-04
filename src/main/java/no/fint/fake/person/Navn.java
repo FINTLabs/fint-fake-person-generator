@@ -29,7 +29,7 @@ public class Navn {
     @PostConstruct
     public void init() throws IOException {
         try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/etternavn.txt"), StandardCharsets.UTF_8))) {
-            etternavn = r.lines().map(l -> WordUtils.capitalizeFully(l.split("[ ;]")[1], ' ')).collect(Collectors.toList());
+            etternavn = r.lines().map(l -> l.split(";")[0]).collect(Collectors.toList());
         }
         try (BufferedReader r = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/guttenavn.txt"), StandardCharsets.UTF_8))) {
             guttenavn = r.lines().map(l -> l.split(";")[0]).collect(Collectors.toList());

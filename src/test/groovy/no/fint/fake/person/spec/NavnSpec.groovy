@@ -14,14 +14,14 @@ class NavnSpec extends Specification {
 
         then:
         !names.etternavn.isEmpty()
-        names.etternavn[0] == 'Hansen'
+        names.etternavn[0] == 'Aa'
 
         then:
         !names.guttenavn.isEmpty()
-        names.guttenavn[0] == 'Jakob'
+        names.guttenavn[0] == 'Aage'
 
         then:
         !names.jentenavn.isEmpty()
-        names.jentenavn[0] == 'Sofie'
+        names.jentenavn[0] == 'Aagot'
     }
 }

@@ -37,10 +37,8 @@ public class PersonGenerator {
             result.setMellomnavn(sample(navn.getEtternavn(), r));
         List<String> collection = female ? navn.getJentenavn() : navn.getGuttenavn();
         String fornavn = sample(collection, r);
-        if (r.nextBoolean()) {
-            int i = r.nextInt(1,3);
-            while (i-- > 0)
-                fornavn = fornavn + " " + sample(collection, r);
+        while (r.nextBoolean()) {
+            fornavn = fornavn + " " + sample(collection, r);
         }
         result.setFornavn(fornavn);
         return result;

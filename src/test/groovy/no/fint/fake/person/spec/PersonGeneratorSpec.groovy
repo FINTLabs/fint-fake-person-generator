@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom
 
 class PersonGeneratorSpec extends Specification {
 
-    PersonGenerator generator;
+    PersonGenerator generator
 
     void setup() {
         def navn = new Navn()
@@ -64,7 +64,7 @@ class PersonGeneratorSpec extends Specification {
 
     def "Can generate complete Person object"() {
         when:
-        def person = generator.generatePerson()
+        def person = generator.generatePerson(2000, 2010)
         println(person)
 
         then:

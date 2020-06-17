@@ -27,7 +27,7 @@ public class PersonGenerator {
     @Autowired
     private Adresser adresser;
 
-    private Set<String> fodselsnummer = new ConcurrentSkipListSet<>();
+    private final Set<String> fodselsnummer = new ConcurrentSkipListSet<>();
 
     public Personnavn generatePersonnavn(boolean female) {
         ThreadLocalRandom r = ThreadLocalRandom.current();
@@ -63,14 +63,14 @@ public class PersonGenerator {
         }
     }
 
-    public PersonResource generatePerson() {
+    public PersonResource generatePerson(int fromYear, int toYear) {
         ThreadLocalRandom r = ThreadLocalRandom.current();
         PersonResource result = new PersonResource();
         boolean female = r.nextBoolean();
         result.setNavn(generatePersonnavn(female));
         result.addKjonn(Link.with(Kjonn.class, "systemid", female ? "2" : "1"));
         do {
-            LocalDate birthDate = LocalDate.of(r.nextInt(2000, 2010), 01, 01).plusDays(r.nextInt(366));
+            LocalDate birthDate = LocalDate.of(r.nextInt(fromYear, toYear), 01, 01).plusDays(r.nextInt(366));
             result.setFodselsdato(Date.from(birthDate.atStartOfDay(ZoneId.of("UTC")).toInstant()));
             result.setFodselsnummer(identifikator(String.format("%Td%<Tm%<Ty%d%d", birthDate, getSequence(female, r), r.nextInt(100))));
         } while (!fodselsnummer.add(result.getFodselsnummer().getIdentifikatorverdi()));

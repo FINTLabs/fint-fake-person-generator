@@ -72,7 +72,7 @@ public class PersonGenerator {
             result.setFodselsdato(Date.from(birthDate.atStartOfDay(ZoneId.of("UTC")).toInstant()));
             result.setFodselsnummer(identifikator(String.format("%Td%<Tm%<Ty%d%d", birthDate, getSequence(female, r), r.nextInt(100))));
         } while (!fodselsnummer.add(result.getFodselsnummer().getIdentifikatorverdi()));
-        result.setPostadresse(sample(adresser.getAdresser(), r));
+        result.setBostedsadresse(sample(adresser.getAdresser(), r));
         Kontaktinformasjon kontaktinformasjon = new Kontaktinformasjon();
         kontaktinformasjon.setMobiltelefonnummer(String.format("%s%07d", r.nextBoolean() ? "4" : "9", r.nextInt(0, 10000000)));
         kontaktinformasjon.setEpostadresse(String.format("%s%d@gmail.com", StringUtils.stripAccents(StringUtils.substringBefore(result.getNavn().getFornavn().toLowerCase(), " ")), r.nextInt(100)));

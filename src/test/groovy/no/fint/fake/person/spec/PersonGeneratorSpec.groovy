@@ -73,7 +73,7 @@ class PersonGeneratorSpec extends Specification {
         person.fodselsdato
         person.fodselsnummer
         person.kjonn.size() == 1
-        person.postadresse.poststed == 'OSLO'
+        person.bostedsadresse.poststed == 'OSLO'
         person.kontaktinformasjon.mobiltelefonnummer
     }
 }
